@@ -4,17 +4,2893 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Υπολογιστής Τιμών Παράδοσης Υλικών</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+:root {
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+  --app-primary: #1976d2;
+  --app-primary-hover: #1565c0;
+  --app-secondary: #f57c00;
+  --app-secondary-hover: #e65100;
+  --font-family-base: Arial, Helvetica, sans-serif;
+  --font-size-xs: 14px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 28px;
+  --font-size-4xl: 32px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.4;
+  --line-height-normal: 1.7;
+  --letter-spacing-base: 0.02em;
+  --word-spacing-base: 0.16em;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: #FFFFFF;
+  color: #1A1A1A;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  word-spacing: 0.16em;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: var(--space-32);
+}
+
+.app-header h1 {
+  color: #1976D2;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.app-header p {
+  color: #1A1A1A;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  border-bottom: 3px solid #E0E0E0;
+  flex-wrap: wrap;
+  background-color: #FAFAFA;
+  padding: 8px;
+  border-radius: 8px 8px 0 0;
+}
+
+.nav-tab {
+  padding: 16px 32px;
+  background: none;
+  border: none;
+  border-bottom: 4px solid transparent;
+  color: #1A1A1A;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.02em;
+}
+
+.nav-tab:hover {
+  color: #1976D2;
+  background-color: #E3F2FD;
+  border-radius: 6px;
+}
+
+.nav-tab.active {
+  color: #1976D2;
+  border-bottom-color: #1976D2;
+  font-weight: 700;
+  background-color: #E3F2FD;
+  border-radius: 6px 6px 0 0;
+}
+
+.btn {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+  background-color: #1976D2;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1565C0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: #757575;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #616161;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background-color: #D32F2F;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #C62828;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background-color: white;
+  color: #1976D2;
+  border: 2px solid #1976D2;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-bg-1);
+}
+
+.btn-small {
+  padding: 12px 20px;
+  font-size: 16px;
+  min-height: 44px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 24px;
+  border: 1px solid #E0E0E0;
+}
+
+.card h2 {
+  color: #1976D2;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.card h3 {
+  color: #1A1A1A;
+  font-size: 18px;
+  margin-bottom: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+  color: #1A1A1A;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #BDBDBD;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: border-color 0.2s ease;
+  min-height: 48px;
+  background-color: white;
+  color: #1A1A1A;
+  line-height: 1.5;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: 3px solid #1976D2;
+  outline-offset: 2px;
+  border-color: #1976D2;
+  box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.1);
+}
+
+.client-list {
+  display: grid;
+  gap: 20px;
+}
+
+.client-item {
+  background-color: white;
+  border: 2px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  min-height: 64px;
+}
+
+.client-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.client-header h3 {
+  color: #1976D2;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.client-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.material-list {
+  display: grid;
+  gap: 12px;
+}
+
+.material-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #F8F8F8;
+  border-radius: 6px;
+  min-height: 44px;
+  align-items: center;
+}
+
+.material-name {
+  font-weight: 700;
+  color: #1A1A1A;
+  font-size: 16px;
+}
+
+.material-price {
+  color: #1976D2;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.material-type-list {
+  display: grid;
+  gap: 16px;
+}
+
+.material-type-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid #E0E0E0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  min-height: 64px;
+}
+
+.material-type-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1A1A;
+  line-height: 1.5;
+}
+
+.material-type-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.calculator-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.calculator-select {
+  margin-bottom: 28px;
+}
+
+.material-inputs {
+  display: grid;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.material-input-item {
+  background-color: #F8F8F8;
+  border: 2px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.material-input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.material-input-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1A1A;
+  line-height: 1.5;
+}
+
+.material-input-price {
+  color: #1976D2;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.expression-input {
+  position: relative;
+}
+
+.calculated-value {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background-color: #E8F5E9;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #1A1A1A;
+  font-weight: 600;
+  border: 2px solid #2E7D32;
+}
+
+.error-text {
+  color: #D32F2F;
+  background-color: #FFEBEE;
+  border: 2px solid #D32F2F;
+  font-weight: 600;
+}
+
+.success-text {
+  color: #2E7D32;
+  font-weight: 600;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 28px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  border: 2px solid #E0E0E0;
+}
+
+.results-table th,
+.results-table td {
+  padding: 18px 20px;
+  text-align: left;
+  border-bottom: 2px solid #E0E0E0;
+  font-size: 16px;
+  min-height: 48px;
+  line-height: 1.6;
+}
+
+.results-table th {
+  background-color: #1976D2;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+
+.results-table tr:last-child td {
+  border-bottom: none;
+}
+
+.results-table tr:hover {
+  background-color: #F5F5F5;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.grand-total {
+  background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+  color: white;
+  padding: 32px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 28px;
+  box-shadow: 0 6px 16px rgba(25, 118, 210, 0.3);
+  border: 3px solid #1565C0;
+}
+
+.grand-total-label {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.grand-total-amount {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 12px;
+  padding: 36px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  border: 2px solid #E0E0E0;
+}
+
+.modal-header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #E0E0E0;
+}
+
+.modal-header h2 {
+  color: #1976D2;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 28px;
+}
+
+.alert {
+  padding: 20px 24px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 3px solid;
+  line-height: 1.6;
+}
+
+.alert-success {
+  background-color: #E8F5E9;
+  color: #1A1A1A;
+  border-color: #2E7D32;
+}
+
+.alert-error {
+  background-color: #FFEBEE;
+  color: #1A1A1A;
+  border-color: #D32F2F;
+}
+
+.alert-info {
+  background-color: #E3F2FD;
+  color: #1A1A1A;
+  border-color: #1976D2;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 32px;
+  color: #1A1A1A;
+  background-color: #F8F8F8;
+  border-radius: 10px;
+  border: 2px dashed #BDBDBD;
+}
+
+.empty-state p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  font-weight: 600;
+}
+
+.client-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-bottom: 36px;
+}
+
+.client-calculation-card {
+  background: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.client-calculation-card:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  border-color: #1976D2;
+}
+
+.client-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid #E0E0E0;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.client-card-header h3 {
+  color: #1976D2;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.client-card-subtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 3px solid #E0E0E0;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: #F5F5F5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.client-card-subtotal .subtotal-amount {
+  color: #2E7D32;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.client-subtotal-row {
+  background-color: #E8F5E9 !important;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.client-subtotal-row:hover {
+  background-color: #E8F5E9 !important;
+}
+
+.client-select-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.client-select-item {
+  padding: 20px 24px;
+  background-color: white;
+  border: 3px solid #E0E0E0;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1A1A;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+}
+
+.client-select-item:hover {
+  background-color: #E3F2FD;
+  border-color: #1976D2;
+  color: #1976D2;
+  transform: translateX(6px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.client-select-item:active {
+  transform: translateX(3px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.calendar-container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  border: 2px solid #E0E0E0;
+  margin-bottom: 24px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.calendar-nav-btn {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 12px;
+  background-color: #1976D2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.calendar-nav-btn:hover {
+  background-color: #1565C0;
+  transform: scale(1.05);
+}
+
+.calendar-nav-btn:active {
+  transform: scale(0.95);
+}
+
+.calendar-month-year {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1976D2;
+  text-align: center;
+  flex: 1;
+  letter-spacing: 0.02em;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.calendar-weekday {
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #666;
+  padding: 8px 4px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 12px 8px;
+  background-color: white;
+  border: 2px solid #E0E0E0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1A1A1A;
+}
+
+.calendar-day:hover {
+  background-color: #E3F2FD;
+  border-color: #1976D2;
+  transform: scale(1.05);
+}
+
+.calendar-day.empty {
+  background-color: transparent;
+  border: none;
+  cursor: default;
+}
+
+.calendar-day.empty:hover {
+  transform: none;
+}
+
+.calendar-day.today {
+  background-color: #FFF9C4;
+  border-color: #F57C00;
+  font-weight: bold;
+}
+
+.calendar-day.selected {
+  background-color: #1976D2;
+  color: white;
+  border-color: #1565C0;
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+}
+
+.calendar-day.selected:hover {
+  background-color: #1565C0;
+}
+
+.save-month-section {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 3px solid #E0E0E0;
+  text-align: center;
+}
+
+.save-month-btn {
+  min-height: 54px;
+  font-size: 18px;
+  padding: 16px 32px;
+}
+
+.month-selector-grid {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.monthly-calculations-section {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 3px solid #E0E0E0;
+}
+
+.monthly-calc-item {
+  padding: 20px;
+  background-color: #F8F8F8;
+  border: 2px solid #E0E0E0;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.monthly-calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.monthly-calc-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1976D2;
+}
+
+.monthly-calc-amount {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2E7D32;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 16px;
+  }
+  .calendar-container {
+    padding: 16px;
+  }
+  .calendar-month-year {
+    font-size: 18px;
+  }
+  .calendar-day {
+    min-height: 48px;
+    font-size: 15px;
+  }
+  .calendar-weekday {
+    font-size: 12px;
+  }
+  .app-header h1 {
+    font-size: 24px;
+  }
+  .nav-tabs {
+    flex-direction: column;
+  }
+  .nav-tab {
+    width: 100%;
+    text-align: center;
+  }
+  .card {
+    padding: 24px;
+  }
+  .client-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .client-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .material-type-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-12);
+  }
+  .material-type-actions {
+    width: 100%;
+  }
+  .results-table {
+    font-size: 14px;
+  }
+  .results-table th,
+  .results-table td {
+    padding: 14px 12px;
+  }
+  .grand-total-amount {
+    font-size: 32px;
+  }
+  .modal {
+    padding: 28px;
+  }
+  .client-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .client-card-header button {
+    width: 100%;
+  }
+  .client-card-subtotal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.price-inputs {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.price-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: end;
+}
+
+@media (max-width: 768px) {
+  .price-input-row {
+    grid-template-columns: 1fr;
+  }
+}
+    </style>
 </head>
 <body>
     <div id="root"></div>
     
-    <!-- React, ReactDOM, and math.js from CDN -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/mathjs@11/lib/browser/math.js"></script>
     
-    <!-- Application Script -->
-    <script src="app.js"></script>
+    <script>
+const { useState, useEffect } = React;
+
+const evaluate = (expression) => {
+  try {
+    if (!/^[0-9+\-*\/().\s]+$/.test(expression)) {
+      throw new Error('Invalid characters in expression');
+    }
+    return new Function('return ' + expression)();
+  } catch (e) {
+    throw new Error('Invalid mathematical expression');
+  }
+};
+
+const INITIAL_MATERIALS = ['Άμμος', 'Χαλίκι', 'Τσιμέντο'];
+
+const INITIAL_SHIPMENT_DAYS = [
+  {
+    id: 'day-001',
+    date: '2025-11-22',
+    clients: [
+      {
+        clientId: '1',
+        clientName: 'Κατασκευές Αθήνας',
+        materials: [
+          { type: 'Άμμος', quantity: 50, price: 12, subtotal: 600 },
+          { type: 'Χαλίκι', quantity: 30, price: 15, subtotal: 450 }
+        ],
+        clientTotal: 1050
+      },
+      {
+        clientId: '2',
+        clientName: 'Τοπιογραφική Θεσσαλονίκης',
+        materials: [
+          { type: 'Άμμος', quantity: 40, price: 10, subtotal: 400 }
+        ],
+        clientTotal: 400
+      }
+    ],
+    dayTotal: 1450
+  },
+  {
+    id: 'day-002',
+    date: '2025-11-23',
+    clients: [
+      {
+        clientId: '1',
+        clientName: 'Κατασκευές Αθήνας',
+        materials: [
+          { type: 'Τσιμέντο', quantity: 25, price: 40, subtotal: 1000 }
+        ],
+        clientTotal: 1000
+      }
+    ],
+    dayTotal: 1000
+  },
+  {
+    id: 'day-003',
+    date: '2025-11-24',
+    clients: [
+      {
+        clientId: '1',
+        clientName: 'Κατασκευές Αθήνας',
+        materials: [
+          { type: 'Άμμος', quantity: 60, price: 12, subtotal: 720 },
+          { type: 'Χαλίκι', quantity: 20, price: 15, subtotal: 300 }
+        ],
+        clientTotal: 1020
+      },
+      {
+        clientId: '2',
+        clientName: 'Τοπιογραφική Θεσσαλονίκης',
+        materials: [
+          { type: 'Τσιμέντο', quantity: 15, price: 45, subtotal: 675 }
+        ],
+        clientTotal: 675
+      }
+    ],
+    dayTotal: 1695
+  }
+];
+
+const INITIAL_CLIENTS = [
+  {
+    id: '1',
+    name: 'Κατασκευές Αθήνας',
+    materials: [
+      { type: 'Άμμος', price: 12 },
+      { type: 'Χαλίκι', price: 15 },
+      { type: 'Τσιμέντο', price: 40 }
+    ]
+  },
+  {
+    id: '2',
+    name: 'Τοπιογραφική Θεσσαλονίκης',
+    materials: [
+      { type: 'Άμμος', price: 10 },
+      { type: 'Χαλίκι', price: 18 },
+      { type: 'Τσιμέντο', price: 45 }
+    ]
+  }
+];
+
+function App() {
+  const [activeTab, setActiveTab] = useState('shipments');
+  const [clients, setClients] = useState(INITIAL_CLIENTS);
+  const [materials, setMaterials] = useState(INITIAL_MATERIALS);
+  const [shipmentDays, setShipmentDays] = useState(INITIAL_SHIPMENT_DAYS);
+  const [monthlyCalculations, setMonthlyCalculations] = useState([]);
+  const [message, setMessage] = useState(null);
+
+  const showMessage = (text, type = 'success') => {
+    setMessage({ text, type });
+    setTimeout(() => setMessage(null), 3000);
+  };
+
+  const addClient = (clientData) => {
+    const newClient = {
+      id: Date.now().toString(),
+      name: clientData.name,
+      materials: materials.map(material => ({
+        type: material,
+        price: clientData.materials?.find(m => m.type === material)?.price || 0
+      }))
+    };
+    setClients([...clients, newClient]);
+    showMessage(`Ο πελάτης "${clientData.name}" προστέθηκε με επιτυχία`);
+  };
+
+  const updateClient = (clientId, clientData) => {
+    setClients(clients.map(client => 
+      client.id === clientId 
+        ? { ...client, name: clientData.name, materials: clientData.materials }
+        : client
+    ));
+    showMessage(`Ο πελάτης "${clientData.name}" ενημερώθηκε με επιτυχία`);
+  };
+
+  const deleteClient = (clientId) => {
+    const client = clients.find(c => c.id === clientId);
+    setClients(clients.filter(c => c.id !== clientId));
+    showMessage(`Ο πελάτης "${client.name}" διαγράφηκε`, 'info');
+  };
+
+  const addMaterial = (materialName) => {
+    if (materials.includes(materialName)) {
+      showMessage('Το υλικό υπάρχει ήδη!', 'error');
+      return;
+    }
+    setMaterials([...materials, materialName]);
+    setClients(clients.map(client => ({
+      ...client,
+      materials: [...client.materials, { type: materialName, price: 0 }]
+    })));
+    showMessage(`Το υλικό "${materialName}" προστέθηκε με επιτυχία`);
+  };
+
+  const renameMaterial = (oldName, newName) => {
+    if (materials.includes(newName)) {
+      showMessage('Το όνομα υλικού υπάρχει ήδη!', 'error');
+      return;
+    }
+    setMaterials(materials.map(m => m === oldName ? newName : m));
+    setClients(clients.map(client => ({
+      ...client,
+      materials: client.materials.map(m => 
+        m.type === oldName ? { ...m, type: newName } : m
+      )
+    })));
+    showMessage(`Το υλικό μετονομάστηκε από "${oldName}" σε "${newName}"`);
+  };
+
+  const deleteMaterial = (materialName) => {
+    setMaterials(materials.filter(m => m !== materialName));
+    setClients(clients.map(client => ({
+      ...client,
+      materials: client.materials.filter(m => m.type !== materialName)
+    })));
+    showMessage(`Το υλικό "${materialName}" διαγράφηκε`, 'info');
+  };
+
+  const addShipmentDay = (shipmentData) => {
+    const newDay = {
+      id: `day-${Date.now()}`,
+      date: shipmentData.date,
+      clients: shipmentData.clients,
+      dayTotal: shipmentData.clients.reduce((sum, c) => sum + c.clientTotal, 0)
+    };
+    setShipmentDays([...shipmentDays, newDay]);
+    showMessage('Η ημέρα αποθηκεύτηκε με επιτυχία');
+  };
+
+  const updateShipmentDay = (dayId, shipmentData) => {
+    setShipmentDays(shipmentDays.map(day =>
+      day.id === dayId
+        ? {
+            ...day,
+            date: shipmentData.date,
+            clients: shipmentData.clients,
+            dayTotal: shipmentData.clients.reduce((sum, c) => sum + c.clientTotal, 0)
+          }
+        : day
+    ));
+    showMessage('Η ημέρα ενημερώθηκε με επιτυχία');
+  };
+
+  const deleteShipmentDay = (dayId) => {
+    setShipmentDays(shipmentDays.filter(d => d.id !== dayId));
+    showMessage('Η ημέρα διαγράφηκε', 'info');
+  };
+
+  const saveMonthlyCalculation = (calcData) => {
+    const newCalc = {
+      id: `monthly-${Date.now()}`,
+      month: calcData.month,
+      year: calcData.year,
+      description: calcData.description,
+      clients: calcData.clients,
+      total: calcData.total,
+      savedDate: new Date().toISOString()
+    };
+    setMonthlyCalculations([...monthlyCalculations, newCalc]);
+    showMessage(`Ο υπολογισμός αποθηκεύτηκε για ${calcData.month} ${calcData.year}`);
+  };
+
+  const deleteMonthlyCalculation = (calcId) => {
+    setMonthlyCalculations(monthlyCalculations.filter(c => c.id !== calcId));
+    showMessage('Ο μηνιαίος υπολογισμός διαγράφηκε', 'info');
+  };
+
+  return React.createElement('div', { className: 'app-container' },
+    React.createElement('header', { className: 'app-header' },
+      React.createElement('h1', null, 'Υπολογιστής Τιμών Παράδοσης Υλικών'),
+      React.createElement('p', null, 'Διαχείριση πελατών, υλικών και υπολογισμός κόστους παράδοσης')
+    ),
+
+    message && React.createElement('div', { 
+      className: `alert alert-${message.type}` 
+    }, message.text),
+
+    React.createElement('nav', { className: 'nav-tabs' },
+      React.createElement('button', {
+        className: `nav-tab ${activeTab === 'shipments' ? 'active' : ''}`,
+        onClick: () => setActiveTab('shipments')
+      }, 'ΗΜΕΡΗΣΙΕΣ ΑΠΟΣΤΟΛΕΣ'),
+      React.createElement('button', {
+        className: `nav-tab ${activeTab === 'history' ? 'active' : ''}`,
+        onClick: () => setActiveTab('history')
+      }, 'ΙΣΤΟΡΙΚΟ'),
+      React.createElement('button', {
+        className: `nav-tab ${activeTab === 'clients' ? 'active' : ''}`,
+        onClick: () => setActiveTab('clients')
+      }, 'ΠΕΛΑΤΕΣ'),
+      React.createElement('button', {
+        className: `nav-tab ${activeTab === 'materials' ? 'active' : ''}`,
+        onClick: () => setActiveTab('materials')
+      }, 'ΥΛΙΚΑ'),
+      React.createElement('button', {
+        className: `nav-tab ${activeTab === 'calculator' ? 'active' : ''}`,
+        onClick: () => setActiveTab('calculator')
+      }, 'ΥΠΟΛΟΓΙΣΤΗΣ')
+    ),
+
+    activeTab === 'shipments' && React.createElement(ShipmentsView, {
+      clients,
+      materials,
+      shipmentDays,
+      onAddShipmentDay: addShipmentDay
+    }),
+    activeTab === 'history' && React.createElement(HistoryView, {
+      shipmentDays,
+      monthlyCalculations,
+      onUpdateShipmentDay: updateShipmentDay,
+      onDeleteShipmentDay: deleteShipmentDay,
+      onDeleteMonthlyCalc: deleteMonthlyCalculation
+    }),
+    activeTab === 'calculator' && React.createElement(CalculatorView, { 
+      clients, 
+      materials,
+      onSaveMonthly: saveMonthlyCalculation
+    }),
+    activeTab === 'clients' && React.createElement(ClientsView, { 
+      clients, 
+      materials,
+      onAddClient: addClient,
+      onUpdateClient: updateClient,
+      onDeleteClient: deleteClient
+    }),
+    activeTab === 'materials' && React.createElement(MaterialsView, { 
+      materials,
+      onAddMaterial: addMaterial,
+      onRenameMaterial: renameMaterial,
+      onDeleteMaterial: deleteMaterial
+    })
+  );
+}
+
+function MobileCalendar({ selectedDate, onDateSelect }) {
+  const [currentMonth, setCurrentMonth] = useState(new Date(selectedDate));
+  
+  const monthNames = ['Ιανουάριος', 'Φεβρουάριος', 'Μάρτιος', 'Απρίλιος', 'Μάιος', 'Ιούνιος',
+    'Ιούλιος', 'Αύγουστος', 'Σεπτέμβριος', 'Οκτώβριος', 'Νοέμβριος', 'Δεκέμβριος'];
+  const dayAbbrev = ['Κ', 'Δ', 'Τ', 'Τ', 'Π', 'Π', 'Σ'];
+  
+  const goToPreviousMonth = () => {
+    const newDate = new Date(currentMonth);
+    newDate.setMonth(newDate.getMonth() - 1);
+    setCurrentMonth(newDate);
+  };
+  
+  const goToNextMonth = () => {
+    const newDate = new Date(currentMonth);
+    newDate.setMonth(newDate.getMonth() + 1);
+    setCurrentMonth(newDate);
+  };
+  
+  const getDaysInMonth = () => {
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startingDayOfWeek = (firstDay.getDay() + 6) % 7;
+    
+    const days = [];
+    
+    for (let i = 0; i < startingDayOfWeek; i++) {
+      days.push({ day: null, isEmpty: true });
+    }
+    
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(year, month, day);
+      const dateStr = date.toISOString().split('T')[0];
+      const isToday = dateStr === new Date().toISOString().split('T')[0];
+      const isSelected = dateStr === selectedDate;
+      
+      days.push({
+        day,
+        date: dateStr,
+        isToday,
+        isSelected,
+        isEmpty: false
+      });
+    }
+    
+    return days;
+  };
+  
+  const days = getDaysInMonth();
+  const monthYear = `${monthNames[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`;
+  
+  return React.createElement('div', { className: 'calendar-container' },
+    React.createElement('div', { className: 'calendar-header' },
+      React.createElement('button', {
+        className: 'calendar-nav-btn',
+        onClick: goToPreviousMonth,
+        'aria-label': 'Προηγούμενος μήνας'
+      }, '◀'),
+      React.createElement('div', { className: 'calendar-month-year' }, monthYear),
+      React.createElement('button', {
+        className: 'calendar-nav-btn',
+        onClick: goToNextMonth,
+        'aria-label': 'Επόμενος μήνας'
+      }, '▶')
+    ),
+    
+    React.createElement('div', { className: 'calendar-weekdays' },
+      dayAbbrev.map((day, i) => 
+        React.createElement('div', { key: i, className: 'calendar-weekday' }, day)
+      )
+    ),
+    
+    React.createElement('div', { className: 'calendar-days' },
+      days.map((dayObj, i) => {
+        if (dayObj.isEmpty) {
+          return React.createElement('div', { key: `empty-${i}`, className: 'calendar-day empty' });
+        }
+        
+        const classNames = ['calendar-day'];
+        if (dayObj.isToday) classNames.push('today');
+        if (dayObj.isSelected) classNames.push('selected');
+        
+        return React.createElement('button', {
+          key: dayObj.date,
+          className: classNames.join(' '),
+          onClick: () => onDateSelect(dayObj.date),
+          'aria-label': `Επιλογή ${dayObj.day}`
+        }, dayObj.day);
+      })
+    ),
+    
+    React.createElement('div', { className: 'form-group', style: { marginTop: '20px' } },
+      React.createElement('label', { className: 'form-label' }, 'Ή εισάγετε ημερομηνία:'),
+      React.createElement('input', {
+        type: 'date',
+        className: 'form-input',
+        value: selectedDate,
+        onChange: (e) => onDateSelect(e.target.value),
+        style: { fontSize: '18px' }
+      })
+    )
+  );
+}
+
+function ShipmentsView({ clients, materials, shipmentDays, onAddShipmentDay }) {
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [selectedClients, setSelectedClients] = useState([]);
+  const [quantities, setQuantities] = useState({});
+  const [calculatedValues, setCalculatedValues] = useState({});
+  const [errors, setErrors] = useState({});
+  const [showAddClientModal, setShowAddClientModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const showSuccess = (message) => {
+    setSuccessMessage(message);
+    setTimeout(() => setSuccessMessage(''), 3000);
+  };
+
+  const addClient = (clientId) => {
+    if (selectedClients.includes(clientId)) {
+      alert('Ο πελάτης έχει ήδη προστεθεί!');
+      return;
+    }
+    const client = clients.find(c => c.id === clientId);
+    setSelectedClients([...selectedClients, clientId]);
+    showSuccess(`Ο πελάτης "${client.name}" προστέθηκε`);
+    setShowAddClientModal(false);
+  };
+
+  const removeClient = (clientId) => {
+    setSelectedClients(selectedClients.filter(id => id !== clientId));
+    const newQuantities = { ...quantities };
+    const newCalculatedValues = { ...calculatedValues };
+    const newErrors = { ...errors };
+    delete newQuantities[clientId];
+    delete newCalculatedValues[clientId];
+    delete newErrors[clientId];
+    setQuantities(newQuantities);
+    setCalculatedValues(newCalculatedValues);
+    setErrors(newErrors);
+  };
+
+  const handleQuantityChange = (clientId, materialType, expression) => {
+    setQuantities({
+      ...quantities,
+      [clientId]: {
+        ...(quantities[clientId] || {}),
+        [materialType]: expression
+      }
+    });
+
+    if (expression.trim() === '') {
+      setCalculatedValues({
+        ...calculatedValues,
+        [clientId]: {
+          ...(calculatedValues[clientId] || {}),
+          [materialType]: 0
+        }
+      });
+      setErrors({
+        ...errors,
+        [clientId]: {
+          ...(errors[clientId] || {}),
+          [materialType]: null
+        }
+      });
+      return;
+    }
+
+    try {
+      const result = evaluate(expression);
+      if (typeof result === 'number' && !isNaN(result)) {
+        setCalculatedValues({
+          ...calculatedValues,
+          [clientId]: {
+            ...(calculatedValues[clientId] || {}),
+            [materialType]: result
+          }
+        });
+        setErrors({
+          ...errors,
+          [clientId]: {
+            ...(errors[clientId] || {}),
+            [materialType]: null
+          }
+        });
+      } else {
+        setErrors({
+          ...errors,
+          [clientId]: {
+            ...(errors[clientId] || {}),
+            [materialType]: 'Μη έγκυρη έκφραση'
+          }
+        });
+      }
+    } catch (error) {
+      setErrors({
+        ...errors,
+        [clientId]: {
+          ...(errors[clientId] || {}),
+          [materialType]: 'Μη έγκυρη μαθηματική έκφραση'
+        }
+      });
+    }
+  };
+
+  const handleSaveDay = () => {
+    if (selectedClients.length === 0) {
+      alert('Προσθέστε τουλάχιστον έναν πελάτη!');
+      return;
+    }
+
+    const dayData = {
+      date: selectedDate,
+      clients: selectedClients.map(clientId => {
+        const client = clients.find(c => c.id === clientId);
+        const clientMaterials = [];
+        let clientTotal = 0;
+
+        client.materials.forEach(material => {
+          const quantity = calculatedValues[clientId]?.[material.type] || 0;
+          if (quantity > 0) {
+            const subtotal = quantity * material.price;
+            clientMaterials.push({
+              type: material.type,
+              quantity,
+              price: material.price,
+              subtotal
+            });
+            clientTotal += subtotal;
+          }
+        });
+
+        return {
+          clientId: client.id,
+          clientName: client.name,
+          materials: clientMaterials,
+          clientTotal
+        };
+      }).filter(c => c.materials.length > 0)
+    };
+
+    if (dayData.clients.length === 0) {
+      alert('Εισάγετε τουλάχιστον μια ποσότητα!');
+      return;
+    }
+
+    onAddShipmentDay(dayData);
+    
+    setSelectedClients([]);
+    setQuantities({});
+    setCalculatedValues({});
+    setErrors({});
+    setSelectedDate(new Date().toISOString().split('T')[0]);
+  };
+
+  const recentDays = [...shipmentDays].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+  const availableClients = clients.filter(c => !selectedClients.includes(c.id));
+
+  return React.createElement('div', { className: 'calculator-container' },
+    React.createElement('div', { className: 'card' },
+      React.createElement('h2', null, 'Ημερήσιες Αποστολές'),
+      
+      successMessage && React.createElement('div', { className: 'alert alert-success' }, successMessage),
+      
+      React.createElement(MobileCalendar, {
+        selectedDate,
+        onDateSelect: setSelectedDate
+      }),
+
+      React.createElement('div', { style: { marginBottom: '24px' } },
+        React.createElement('button', {
+          className: 'btn btn-primary',
+          onClick: () => setShowAddClientModal(true),
+          style: { fontSize: '18px', minHeight: '54px' }
+        }, 'Προσθήκη Πελάτη')
+      ),
+
+      selectedClients.length > 0 && React.createElement('div', { className: 'client-cards-container' },
+        selectedClients.map(clientId => {
+          const client = clients.find(c => c.id === clientId);
+          if (!client) return null;
+          
+          return React.createElement(ShipmentClientCard, {
+            key: clientId,
+            client,
+            quantities: quantities[clientId] || {},
+            calculatedValues: calculatedValues[clientId] || {},
+            errors: errors[clientId] || {},
+            onQuantityChange: (materialType, expression) => handleQuantityChange(clientId, materialType, expression),
+            onRemove: () => removeClient(clientId)
+          });
+        })
+      ),
+
+      selectedClients.length > 0 && React.createElement('div', { style: { marginTop: '24px', textAlign: 'center' } },
+        React.createElement('button', {
+          className: 'btn btn-primary',
+          onClick: handleSaveDay,
+          style: { fontSize: '20px', minHeight: '60px', padding: '16px 48px' }
+        }, 'Αποθήκευση Ημέρας')
+      ),
+
+      selectedClients.length === 0 && React.createElement('div', { className: 'empty-state' },
+        React.createElement('p', null, 'Κάντε κλικ στο "Προσθήκη Πελάτη" για να ξεκινήσετε την καταγραφή')
+      )
+    ),
+
+    recentDays.length > 0 && React.createElement('div', { className: 'card', style: { marginTop: '32px' } },
+      React.createElement('h3', null, 'Πρόσφατες Ημέρες'),
+      React.createElement('div', { style: { display: 'grid', gap: '16px' } },
+        recentDays.map(day =>
+          React.createElement('div', {
+            key: day.id,
+            style: {
+              padding: '20px',
+              backgroundColor: '#F8F8F8',
+              borderRadius: '8px',
+              border: '2px solid #E0E0E0'
+            }
+          },
+            React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+              React.createElement('div', null,
+                React.createElement('div', { style: { fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' } },
+                  new Date(day.date).toLocaleDateString('el-GR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+                ),
+                React.createElement('div', { style: { fontSize: '16px', color: '#666' } },
+                  `${day.clients.length} Πελάτ${day.clients.length === 1 ? 'ης' : 'ες'}: ${day.clients.map(c => c.clientName).join(', ')}`
+                )
+              ),
+              React.createElement('div', { style: { fontSize: '22px', fontWeight: 'bold', color: '#1976D2' } },
+                `€${day.dayTotal.toFixed(2)}`
+              )
+            )
+          )
+        )
+      )
+    ),
+
+    showAddClientModal && React.createElement(AddClientModal, {
+      clients: availableClients,
+      onSelect: addClient,
+      onCancel: () => setShowAddClientModal(false)
+    })
+  );
+}
+
+function ShipmentClientCard({ client, quantities, calculatedValues, errors, onQuantityChange, onRemove }) {
+  return React.createElement('div', { className: 'client-calculation-card' },
+    React.createElement('div', { className: 'client-card-header' },
+      React.createElement('h3', null, client.name),
+      React.createElement('button', {
+        className: 'btn btn-danger btn-small',
+        onClick: onRemove
+      }, 'Αφαίρεση Πελάτη')
+    ),
+
+    React.createElement('div', { className: 'material-inputs' },
+      client.materials.map(material =>
+        React.createElement('div', { key: material.type, className: 'material-input-item' },
+          React.createElement('div', { className: 'material-input-header' },
+            React.createElement('span', { className: 'material-input-name' }, material.type),
+            React.createElement('span', { className: 'material-input-price' }, 
+              `€${material.price.toFixed(2)} ανά τόνο`
+            )
+          ),
+          React.createElement('div', { className: 'form-group' },
+            React.createElement('label', { className: 'form-label' }, 'Ποσότητα (τόνοι)'),
+            React.createElement('input', {
+              type: 'text',
+              className: 'form-input',
+              placeholder: 'π.χ. 50 + 30 * 2',
+              value: quantities[material.type] || '',
+              onChange: (e) => onQuantityChange(material.type, e.target.value),
+              style: { fontSize: '18px' }
+            }),
+            (calculatedValues[material.type] !== undefined && !errors[material.type]) &&
+              React.createElement('div', { className: 'calculated-value success-text' },
+                `Ποσότητα: ${calculatedValues[material.type].toFixed(2)} τόνοι | Υποσύνολο: €${(calculatedValues[material.type] * material.price).toFixed(2)}`
+              ),
+            errors[material.type] &&
+              React.createElement('div', { className: 'calculated-value error-text' },
+                errors[material.type]
+              )
+          )
+        )
+      )
+    )
+  );
+}
+
+function HistoryView({ shipmentDays, monthlyCalculations, onUpdateShipmentDay, onDeleteShipmentDay, onDeleteMonthlyCalc }) {
+  const [viewFilter, setViewFilter] = useState('all');
+  const [selectedDayForEdit, setSelectedDayForEdit] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
+  const [expandedDay, setExpandedDay] = useState(null);
+
+  const getFilteredDays = () => {
+    const now = new Date();
+    const sortedDays = [...shipmentDays].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    if (viewFilter === 'all') return sortedDays;
+
+    return sortedDays.filter(day => {
+      const dayDate = new Date(day.date);
+      
+      if (viewFilter === 'week') {
+        const weekAgo = new Date(now);
+        weekAgo.setDate(weekAgo.getDate() - 7);
+        return dayDate >= weekAgo;
+      }
+      
+      if (viewFilter === 'month') {
+        return dayDate.getMonth() === now.getMonth() && dayDate.getFullYear() === now.getFullYear();
+      }
+      
+      if (viewFilter === 'year') {
+        return dayDate.getFullYear() === now.getFullYear();
+      }
+      
+      return true;
+    });
+  };
+
+  const calculateStats = () => {
+    const filtered = getFilteredDays();
+    
+    const stats = {
+      totalShipments: filtered.length,
+      totalRevenue: filtered.reduce((sum, day) => sum + day.dayTotal, 0),
+      avgDaily: 0,
+      byClient: {},
+      byMaterial: {}
+    };
+
+    if (filtered.length > 0) {
+      stats.avgDaily = stats.totalRevenue / filtered.length;
+    }
+
+    filtered.forEach(day => {
+      day.clients.forEach(client => {
+        if (!stats.byClient[client.clientName]) {
+          stats.byClient[client.clientName] = 0;
+        }
+        stats.byClient[client.clientName] += client.clientTotal;
+      });
+    });
+
+    filtered.forEach(day => {
+      day.clients.forEach(client => {
+        client.materials.forEach(material => {
+          if (!stats.byMaterial[material.type]) {
+            stats.byMaterial[material.type] = { tonnage: 0, revenue: 0 };
+          }
+          stats.byMaterial[material.type].tonnage += material.quantity;
+          stats.byMaterial[material.type].revenue += material.subtotal;
+        });
+      });
+    });
+
+    return stats;
+  };
+
+  const handleDelete = (dayId) => {
+    onDeleteShipmentDay(dayId);
+    setShowDeleteConfirm(null);
+  };
+
+  const handleExportCSV = () => {
+    const filtered = getFilteredDays();
+    
+    let csv = '\uFEFF';
+    csv += 'Ημερομηνία,Πελάτης,Υλικό,Ποσότητα,Τιμή/Τόνο,Υποσύνολο,Ημερήσιο Σύνολο\n';
+    
+    filtered.forEach(day => {
+      day.clients.forEach((client, clientIndex) => {
+        client.materials.forEach((material, materialIndex) => {
+          const isFirstRow = clientIndex === 0 && materialIndex === 0;
+          csv += `${new Date(day.date).toLocaleDateString('el-GR')},`;
+          csv += `${client.clientName},`;
+          csv += `${material.type},`;
+          csv += `${material.quantity},`;
+          csv += `${material.price},`;
+          csv += `${material.subtotal},`;
+          csv += isFirstRow ? `${day.dayTotal}` : '';
+          csv += '\n';
+        });
+      });
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `shipments_${new Date().toISOString().split('T')[0]}_UTF8.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const filteredDays = getFilteredDays();
+  const stats = calculateStats();
+
+  return React.createElement('div', { className: 'calculator-container' },
+    React.createElement('div', { className: 'card' },
+      React.createElement('h2', null, 'Ιστορικό Αποστολών'),
+
+      React.createElement('div', { style: { marginBottom: '32px' } },
+        React.createElement('div', { style: { display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '20px' } },
+          React.createElement('button', {
+            className: `btn ${viewFilter === 'all' ? 'btn-primary' : 'btn-outline'}`,
+            onClick: () => setViewFilter('all'),
+            style: { fontSize: '16px' }
+          }, 'Όλες'),
+          React.createElement('button', {
+            className: `btn ${viewFilter === 'week' ? 'btn-primary' : 'btn-outline'}`,
+            onClick: () => setViewFilter('week'),
+            style: { fontSize: '16px' }
+          }, 'Εβδομάδα'),
+          React.createElement('button', {
+            className: `btn ${viewFilter === 'month' ? 'btn-primary' : 'btn-outline'}`,
+            onClick: () => setViewFilter('month'),
+            style: { fontSize: '16px' }
+          }, 'Μήνας'),
+          React.createElement('button', {
+            className: `btn ${viewFilter === 'year' ? 'btn-primary' : 'btn-outline'}`,
+            onClick: () => setViewFilter('year'),
+            style: { fontSize: '16px' }
+          }, 'Έτος'),
+          React.createElement('button', {
+            className: 'btn btn-secondary',
+            onClick: handleExportCSV,
+            style: { fontSize: '16px', marginLeft: 'auto' }
+          }, 'Εξαγωγή σε CSV')
+        )
+      ),
+
+      filteredDays.length > 0 && React.createElement('div', { 
+        style: { 
+          backgroundColor: '#E3F2FD',
+          padding: '24px',
+          borderRadius: '10px',
+          marginBottom: '32px',
+          border: '2px solid #1976D2'
+        }
+      },
+        React.createElement('h3', { style: { marginBottom: '20px', fontSize: '22px' } }, 'Στατιστικά'),
+        React.createElement('div', { style: { display: 'grid', gap: '16px' } },
+          React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' } },
+            React.createElement('div', { style: { padding: '16px', backgroundColor: 'white', borderRadius: '8px' } },
+              React.createElement('div', { style: { fontSize: '14px', color: '#666', marginBottom: '4px' } }, 'Συνολικές Αποστολές'),
+              React.createElement('div', { style: { fontSize: '24px', fontWeight: 'bold', color: '#1976D2' } }, stats.totalShipments)
+            ),
+            React.createElement('div', { style: { padding: '16px', backgroundColor: 'white', borderRadius: '8px' } },
+              React.createElement('div', { style: { fontSize: '14px', color: '#666', marginBottom: '4px' } }, 'Συνολική Είσπραξη'),
+              React.createElement('div', { style: { fontSize: '24px', fontWeight: 'bold', color: '#2E7D32' } }, `€${stats.totalRevenue.toFixed(2)}`)
+            ),
+            React.createElement('div', { style: { padding: '16px', backgroundColor: 'white', borderRadius: '8px' } },
+              React.createElement('div', { style: { fontSize: '14px', color: '#666', marginBottom: '4px' } }, 'Μέσος Όρος Ημέρας'),
+              React.createElement('div', { style: { fontSize: '24px', fontWeight: 'bold', color: '#F57C00' } }, `€${stats.avgDaily.toFixed(2)}`)
+            )
+          ),
+
+          Object.keys(stats.byClient).length > 0 && React.createElement('div', { style: { marginTop: '16px' } },
+            React.createElement('h4', { style: { fontSize: '18px', marginBottom: '12px' } }, 'Ανάλυση ανά Πελάτη'),
+            React.createElement('div', { style: { display: 'grid', gap: '8px' } },
+              Object.entries(stats.byClient).map(([clientName, total]) =>
+                React.createElement('div', {
+                  key: clientName,
+                  style: {
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '12px 16px',
+                    backgroundColor: 'white',
+                    borderRadius: '6px',
+                    fontSize: '16px'
+                  }
+                },
+                  React.createElement('span', null, clientName),
+                  React.createElement('span', { style: { fontWeight: 'bold' } }, `€${total.toFixed(2)}`)
+                )
+              )
+            )
+          ),
+
+          Object.keys(stats.byMaterial).length > 0 && React.createElement('div', { style: { marginTop: '16px' } },
+            React.createElement('h4', { style: { fontSize: '18px', marginBottom: '12px' } }, 'Ανάλυση ανά Υλικό'),
+            React.createElement('div', { style: { display: 'grid', gap: '8px' } },
+              Object.entries(stats.byMaterial).map(([materialType, data]) =>
+                React.createElement('div', {
+                  key: materialType,
+                  style: {
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '12px 16px',
+                    backgroundColor: 'white',
+                    borderRadius: '6px',
+                    fontSize: '16px'
+                  }
+                },
+                  React.createElement('span', null, materialType),
+                  React.createElement('div', { style: { display: 'flex', gap: '24px' } },
+                    React.createElement('span', null, `${data.tonnage.toFixed(2)} τόνοι`),
+                    React.createElement('span', { style: { fontWeight: 'bold' } }, `€${data.revenue.toFixed(2)}`)
+                  )
+                )
+              )
+            )
+          )
+        )
+      ),
+
+      monthlyCalculations && monthlyCalculations.length > 0 && React.createElement('div', { className: 'monthly-calculations-section' },
+        React.createElement('h3', { style: { marginBottom: '20px', fontSize: '22px' } }, 'Μηνιαίοι Υπολογισμοί'),
+        React.createElement('div', { style: { display: 'grid', gap: '16px', marginBottom: '32px' } },
+          monthlyCalculations.map(calc =>
+            React.createElement('div', {
+              key: calc.id,
+              className: 'monthly-calc-item'
+            },
+              React.createElement('div', { className: 'monthly-calc-header' },
+                React.createElement('div', null,
+                  React.createElement('div', { className: 'monthly-calc-title' },
+                    `${calc.month} ${calc.year}`
+                  ),
+                  calc.description && React.createElement('div', { style: { fontSize: '14px', color: '#666', marginTop: '4px' } },
+                    calc.description
+                  ),
+                  React.createElement('div', { style: { fontSize: '14px', color: '#666', marginTop: '4px' } },
+                    `Αποθηκεύτηκε: ${new Date(calc.savedDate).toLocaleDateString('el-GR')}`
+                  )
+                ),
+                React.createElement('div', { className: 'monthly-calc-amount' },
+                  `€${calc.total.toFixed(2)}`
+                )
+              ),
+              React.createElement('button', {
+                className: 'btn btn-danger btn-small',
+                onClick: () => {
+                  if (confirm('Διαγραφή αυτού του μηνιαίου υπολογισμού;')) {
+                    onDeleteMonthlyCalc(calc.id);
+                  }
+                },
+                style: { marginTop: '12px' }
+              }, 'Διαγραφή')
+            )
+          )
+        )
+      ),
+
+      React.createElement('h3', { style: { marginBottom: '20px', fontSize: '22px' } }, 'Καταγεγραμμένες Ημέρες'),
+      
+      filteredDays.length === 0 ?
+        React.createElement('div', { className: 'empty-state' },
+          React.createElement('p', null, 'Δεν υπάρχουν καταγεγραμμένες ημέρες για την επιλεγμένη περίοδο')
+        ) :
+        React.createElement('div', { style: { display: 'grid', gap: '16px' } },
+          filteredDays.map(day =>
+            React.createElement('div', {
+              key: day.id,
+              style: {
+                padding: '24px',
+                backgroundColor: 'white',
+                border: '2px solid #E0E0E0',
+                borderRadius: '10px',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.06)'
+              }
+            },
+              React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' } },
+                React.createElement('div', null,
+                  React.createElement('div', { style: { fontSize: '20px', fontWeight: 'bold', marginBottom: '8px' } },
+                    new Date(day.date).toLocaleDateString('el-GR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+                  ),
+                  React.createElement('div', { style: { fontSize: '16px', color: '#666' } },
+                    `${day.clients.length} Πελάτ${day.clients.length === 1 ? 'ης' : 'ες'}`
+                  )
+                ),
+                React.createElement('div', { style: { fontSize: '24px', fontWeight: 'bold', color: '#1976D2' } },
+                  `€${day.dayTotal.toFixed(2)}`
+                )
+              ),
+
+              React.createElement('div', { style: { display: 'flex', gap: '12px', flexWrap: 'wrap' } },
+                React.createElement('button', {
+                  className: 'btn btn-outline btn-small',
+                  onClick: () => setExpandedDay(expandedDay === day.id ? null : day.id)
+                }, expandedDay === day.id ? 'Απόκρυψη Λεπτομερειών' : 'Λεπτομέρειες'),
+                React.createElement('button', {
+                  className: 'btn btn-danger btn-small',
+                  onClick: () => setShowDeleteConfirm(day.id)
+                }, 'Διαγραφή')
+              ),
+
+              expandedDay === day.id && React.createElement('div', { style: { marginTop: '20px', paddingTop: '20px', borderTop: '2px solid #E0E0E0' } },
+                day.clients.map(client =>
+                  React.createElement('div', { key: client.clientId, style: { marginBottom: '20px' } },
+                    React.createElement('h4', { style: { fontSize: '18px', fontWeight: 'bold', marginBottom: '12px', color: '#1976D2' } },
+                      client.clientName
+                    ),
+                    React.createElement('table', { className: 'results-table' },
+                      React.createElement('thead', null,
+                        React.createElement('tr', null,
+                          React.createElement('th', null, 'Υλικό'),
+                          React.createElement('th', { className: 'text-right' }, 'Ποσότητα'),
+                          React.createElement('th', { className: 'text-right' }, 'Τιμή/Τόνο'),
+                          React.createElement('th', { className: 'text-right' }, 'Υποσύνολο')
+                        )
+                      ),
+                      React.createElement('tbody', null,
+                        client.materials.map(material =>
+                          React.createElement('tr', { key: material.type },
+                            React.createElement('td', null, material.type),
+                            React.createElement('td', { className: 'text-right' }, material.quantity.toFixed(2)),
+                            React.createElement('td', { className: 'text-right' }, `€${material.price.toFixed(2)}`),
+                            React.createElement('td', { className: 'text-right' }, `€${material.subtotal.toFixed(2)}`)
+                          )
+                        ),
+                        React.createElement('tr', { className: 'client-subtotal-row' },
+                          React.createElement('td', { colSpan: 3, style: { textAlign: 'right', fontWeight: 'bold' } }, 'Σύνολο Πελάτη:'),
+                          React.createElement('td', { className: 'text-right', style: { fontWeight: 'bold' } }, `€${client.clientTotal.toFixed(2)}`)
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+    ),
+
+    showDeleteConfirm && React.createElement('div', { className: 'modal-overlay', onClick: () => setShowDeleteConfirm(null) },
+      React.createElement('div', { 
+        className: 'modal',
+        onClick: (e) => e.stopPropagation()
+      },
+        React.createElement('div', { className: 'modal-header' },
+          React.createElement('h2', null, 'Επιβεβαίωση Διαγραφής')
+        ),
+        React.createElement('p', { style: { fontSize: '18px', marginBottom: '24px' } },
+          'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την ημέρα;'
+        ),
+        React.createElement('div', { className: 'modal-actions' },
+          React.createElement('button', {
+            className: 'btn btn-outline',
+            onClick: () => setShowDeleteConfirm(null)
+          }, 'Όχι'),
+          React.createElement('button', {
+            className: 'btn btn-danger',
+            onClick: () => handleDelete(showDeleteConfirm)
+          }, 'Ναι')
+        )
+      )
+    )
+  );
+}
+
+function CalculatorView({ clients, materials, onSaveMonthly }) {
+  const [selectedClients, setSelectedClients] = useState([]);
+  const [tonnageInputs, setTonnageInputs] = useState({});
+  const [calculatedValues, setCalculatedValues] = useState({});
+  const [errors, setErrors] = useState({});
+  const [showAddClientModal, setShowAddClientModal] = useState(false);
+  const [showSaveMonthModal, setShowSaveMonthModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const showSuccess = (message) => {
+    setSuccessMessage(message);
+    setTimeout(() => setSuccessMessage(''), 3000);
+  };
+
+  const addClient = (clientId) => {
+    if (selectedClients.includes(clientId)) {
+      alert('Ο πελάτης έχει ήδη προστεθεί!');
+      return;
+    }
+    const client = clients.find(c => c.id === clientId);
+    setSelectedClients([...selectedClients, clientId]);
+    showSuccess(`Ο πελάτης "${client.name}" προστέθηκε στον υπολογισμό`);
+    setShowAddClientModal(false);
+  };
+
+  const removeClient = (clientId) => {
+    setSelectedClients(selectedClients.filter(id => id !== clientId));
+    const newTonnageInputs = { ...tonnageInputs };
+    const newCalculatedValues = { ...calculatedValues };
+    const newErrors = { ...errors };
+    delete newTonnageInputs[clientId];
+    delete newCalculatedValues[clientId];
+    delete newErrors[clientId];
+    setTonnageInputs(newTonnageInputs);
+    setCalculatedValues(newCalculatedValues);
+    setErrors(newErrors);
+  };
+
+  const handleTonnageChange = (clientId, materialType, expression) => {
+    setTonnageInputs({
+      ...tonnageInputs,
+      [clientId]: {
+        ...(tonnageInputs[clientId] || {}),
+        [materialType]: expression
+      }
+    });
+
+    if (expression.trim() === '') {
+      setCalculatedValues({
+        ...calculatedValues,
+        [clientId]: {
+          ...(calculatedValues[clientId] || {}),
+          [materialType]: 0
+        }
+      });
+      setErrors({
+        ...errors,
+        [clientId]: {
+          ...(errors[clientId] || {}),
+          [materialType]: null
+        }
+      });
+      return;
+    }
+
+    try {
+      const result = evaluate(expression);
+      if (typeof result === 'number' && !isNaN(result)) {
+        setCalculatedValues({
+          ...calculatedValues,
+          [clientId]: {
+            ...(calculatedValues[clientId] || {}),
+            [materialType]: result
+          }
+        });
+        setErrors({
+          ...errors,
+          [clientId]: {
+            ...(errors[clientId] || {}),
+            [materialType]: null
+          }
+        });
+      } else {
+        setErrors({
+          ...errors,
+          [clientId]: {
+            ...(errors[clientId] || {}),
+            [materialType]: 'Invalid expression'
+          }
+        });
+      }
+    } catch (error) {
+      setErrors({
+        ...errors,
+        [clientId]: {
+          ...(errors[clientId] || {}),
+          [materialType]: 'Μη έγκυρη μαθηματική έκφραση'
+        }
+      });
+    }
+  };
+
+  const clearCalculations = () => {
+    setSelectedClients([]);
+    setTonnageInputs({});
+    setCalculatedValues({});
+    setErrors({});
+    showSuccess('Όλοι οι υπολογισμοί εκκαθαρίστηκαν');
+  };
+
+  const calculateClientSubtotal = (clientId) => {
+    const client = clients.find(c => c.id === clientId);
+    if (!client) return 0;
+    
+    return client.materials.reduce((total, material) => {
+      const tonnage = calculatedValues[clientId]?.[material.type] || 0;
+      return total + (tonnage * material.price);
+    }, 0);
+  };
+
+  const calculateGrandTotal = () => {
+    return selectedClients.reduce((total, clientId) => {
+      return total + calculateClientSubtotal(clientId);
+    }, 0);
+  };
+
+  const getBreakdownRows = () => {
+    const rows = [];
+    selectedClients.forEach(clientId => {
+      const client = clients.find(c => c.id === clientId);
+      if (!client) return;
+      
+      client.materials.forEach(material => {
+        const tonnage = calculatedValues[clientId]?.[material.type] || 0;
+        if (tonnage > 0) {
+          rows.push({
+            clientId,
+            clientName: client.name,
+            materialType: material.type,
+            tonnage,
+            pricePerTon: material.price,
+            subtotal: tonnage * material.price
+          });
+        }
+      });
+    });
+    return rows;
+  };
+
+  const grandTotal = calculateGrandTotal();
+  const breakdownRows = getBreakdownRows();
+  const availableClients = clients.filter(c => !selectedClients.includes(c.id));
+
+  return React.createElement('div', { className: 'calculator-container' },
+    React.createElement('div', { className: 'card' },
+      React.createElement('h2', null, 'Υπολογιστής Τιμών'),
+      
+      successMessage && React.createElement('div', { className: 'alert alert-success' }, successMessage),
+      
+      React.createElement('div', { style: { marginBottom: '24px' } },
+        React.createElement('button', {
+          className: 'btn btn-primary',
+          onClick: () => setShowAddClientModal(true),
+          style: { fontSize: '18px', minHeight: '54px' }
+        }, '➕ Προσθήκη Πελάτη')
+      ),
+
+      selectedClients.length > 0 && React.createElement('div', { className: 'client-cards-container' },
+        selectedClients.map(clientId => {
+          const client = clients.find(c => c.id === clientId);
+          if (!client) return null;
+          
+          return React.createElement(ClientCard, {
+            key: clientId,
+            client,
+            tonnageInputs: tonnageInputs[clientId] || {},
+            calculatedValues: calculatedValues[clientId] || {},
+            errors: errors[clientId] || {},
+            onTonnageChange: (materialType, expression) => handleTonnageChange(clientId, materialType, expression),
+            onRemove: () => removeClient(clientId),
+            subtotal: calculateClientSubtotal(clientId)
+          });
+        })
+      ),
+
+      breakdownRows.length > 0 && React.createElement('div', { style: { marginTop: '32px' } },
+        React.createElement('h3', null, 'Αναλυτική Κατανομή'),
+        React.createElement('table', { className: 'results-table' },
+          React.createElement('thead', null,
+            React.createElement('tr', null,
+              React.createElement('th', null, 'Πελάτης'),
+              React.createElement('th', null, 'Υλικό'),
+              React.createElement('th', { className: 'text-right' }, 'Ποσότητα'),
+              React.createElement('th', { className: 'text-right' }, 'Τιμή/Τόνο'),
+              React.createElement('th', { className: 'text-right' }, 'Υποσύνολο')
+            )
+          ),
+          React.createElement('tbody', null,
+            breakdownRows.map((row, index) => 
+              React.createElement('tr', { key: `${row.clientId}-${row.materialType}` },
+                React.createElement('td', null, row.clientName),
+                React.createElement('td', null, row.materialType),
+                React.createElement('td', { className: 'text-right' }, row.tonnage.toFixed(2)),
+                React.createElement('td', { className: 'text-right' }, `€${row.pricePerTon.toFixed(2)}`),
+                React.createElement('td', { className: 'text-right' }, `€${row.subtotal.toFixed(2)}`)
+              )
+            ),
+            selectedClients.map(clientId => {
+              const client = clients.find(c => c.id === clientId);
+              const subtotal = calculateClientSubtotal(clientId);
+              if (subtotal === 0) return null;
+              return React.createElement('tr', { 
+                key: `subtotal-${clientId}`,
+                className: 'client-subtotal-row'
+              },
+                React.createElement('td', { colSpan: 4, style: { fontWeight: 'bold', textAlign: 'right' } },
+                  `Υποσύνολο ${client.name}:`
+                ),
+                React.createElement('td', { className: 'text-right', style: { fontWeight: 'bold' } },
+                  `€${subtotal.toFixed(2)}`
+                )
+              );
+            })
+          )
+        ),
+
+        React.createElement('div', { className: 'grand-total' },
+          React.createElement('div', { className: 'grand-total-label' }, '💵 ΓΕΝΙΚΟ ΣΥΝΟΛΟ'),
+          React.createElement('div', { className: 'grand-total-amount' }, `€${grandTotal.toFixed(2)}`)
+        ),
+
+        React.createElement('div', { className: 'save-month-section' },
+          React.createElement('button', {
+            className: 'btn btn-primary save-month-btn',
+            onClick: () => setShowSaveMonthModal(true)
+          }, '💾 Αποθήκευση Υπολογισμού')
+        ),
+
+        React.createElement('button', {
+          className: 'btn btn-secondary',
+          onClick: clearCalculations,
+          style: { fontSize: '18px', minHeight: '54px' }
+        }, '🧹 Εκκαθάριση')
+      ),
+
+      selectedClients.length === 0 && React.createElement('div', { className: 'empty-state' },
+        React.createElement('p', null, '👆 Κάντε κλικ στο "Προσθήκη Πελάτη" για να ξεκινήσετε τους υπολογισμούς')
+      )
+    ),
+
+    showAddClientModal && React.createElement(AddClientModal, {
+      clients: availableClients,
+      onSelect: addClient,
+      onCancel: () => setShowAddClientModal(false)
+    }),
+
+    showSaveMonthModal && React.createElement(SaveMonthModal, {
+      selectedClients,
+      clients,
+      calculatedValues,
+      grandTotal,
+      onSave: (monthData) => {
+        const clientsData = selectedClients.map(clientId => {
+          const client = clients.find(c => c.id === clientId);
+          return {
+            clientId,
+            clientName: client.name,
+            materials: client.materials.map(m => ({
+              type: m.type,
+              quantity: calculatedValues[clientId]?.[m.type] || 0,
+              price: m.price
+            })).filter(m => m.quantity > 0)
+          };
+        }).filter(c => c.materials.length > 0);
+
+        onSaveMonthly({
+          month: monthData.month,
+          year: monthData.year,
+          description: monthData.description,
+          clients: clientsData,
+          total: grandTotal
+        });
+        setShowSaveMonthModal(false);
+      },
+      onCancel: () => setShowSaveMonthModal(false)
+    })
+  );
+}
+
+function ClientCard({ client, tonnageInputs, calculatedValues, errors, onTonnageChange, onRemove, subtotal }) {
+  return React.createElement('div', { className: 'client-calculation-card' },
+    React.createElement('div', { className: 'client-card-header' },
+      React.createElement('h3', null, client.name),
+      React.createElement('button', {
+        className: 'btn btn-danger btn-small',
+        onClick: onRemove
+      }, '❌ Αφαίρεση Πελάτη')
+    ),
+
+    React.createElement('div', { className: 'material-inputs' },
+      client.materials.map(material =>
+        React.createElement('div', { key: material.type, className: 'material-input-item' },
+          React.createElement('div', { className: 'material-input-header' },
+            React.createElement('span', { className: 'material-input-name' }, material.type),
+            React.createElement('span', { className: 'material-input-price' }, 
+              `€${material.price.toFixed(2)} ανά τόνο`
+            )
+          ),
+          React.createElement('div', { className: 'form-group' },
+            React.createElement('label', { className: 'form-label' }, 'Μηνιαίος Όγκος (τόνοι)'),
+            React.createElement('input', {
+              type: 'text',
+              className: 'form-input',
+              placeholder: 'π.χ. 50 + 30 * 2',
+              value: tonnageInputs[material.type] || '',
+              onChange: (e) => onTonnageChange(material.type, e.target.value),
+              style: { fontSize: '18px' }
+            }),
+            (calculatedValues[material.type] !== undefined && !errors[material.type]) &&
+              React.createElement('div', { className: 'calculated-value success-text' },
+                `✅ Ποσότητα: ${calculatedValues[material.type].toFixed(2)} τόνοι | Υποσύνολο: €${(calculatedValues[material.type] * material.price).toFixed(2)}`
+              ),
+            errors[material.type] &&
+              React.createElement('div', { className: 'calculated-value error-text' },
+                `❌ ${errors[material.type]}`
+              )
+          )
+        )
+      )
+    ),
+
+    subtotal > 0 && React.createElement('div', { className: 'client-card-subtotal' },
+      React.createElement('span', null, '💰 Υποσύνολο Πελάτη:'),
+      React.createElement('span', { className: 'subtotal-amount' }, `€${subtotal.toFixed(2)}`)
+    )
+  );
+}
+
+function SaveMonthModal({ selectedClients, clients, calculatedValues, grandTotal, onSave, onCancel }) {
+  const currentYear = new Date().getFullYear();
+  const months = ['Ιανουάριος', 'Φεβρουάριος', 'Μάρτιος', 'Απρίλιος', 'Μάιος', 'Ιούνιος',
+    'Ιούλιος', 'Αύγουστος', 'Σεπτέμβριος', 'Οκτώβριος', 'Νοέμβριος', 'Δεκέμβριος'];
+  
+  const [selectedMonth, setSelectedMonth] = useState(months[new Date().getMonth()]);
+  const [selectedYear, setSelectedYear] = useState(currentYear);
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (selectedClients.length === 0) {
+      alert('Δεν υπάρχουν υπολογισμοί για αποθήκευση!');
+      return;
+    }
+    onSave({
+      month: selectedMonth,
+      year: selectedYear,
+      description: description.trim()
+    });
+  };
+
+  const years = [currentYear - 1, currentYear, currentYear + 1];
+
+  return React.createElement('div', { className: 'modal-overlay', onClick: onCancel },
+    React.createElement('div', { 
+      className: 'modal',
+      onClick: (e) => e.stopPropagation()
+    },
+      React.createElement('div', { className: 'modal-header' },
+        React.createElement('h2', null, 'Αποθήκευση Υπολογισμού')
+      ),
+
+      React.createElement('form', { onSubmit: handleSubmit },
+        React.createElement('div', { className: 'month-selector-grid' },
+          React.createElement('div', { className: 'form-group' },
+            React.createElement('label', { className: 'form-label' }, 'Μήνας'),
+            React.createElement('select', {
+              className: 'form-select',
+              value: selectedMonth,
+              onChange: (e) => setSelectedMonth(e.target.value)
+            },
+              months.map(month =>
+                React.createElement('option', { key: month, value: month }, month)
+              )
+            )
+          ),
+
+          React.createElement('div', { className: 'form-group' },
+            React.createElement('label', { className: 'form-label' }, 'Έτος'),
+            React.createElement('select', {
+              className: 'form-select',
+              value: selectedYear,
+              onChange: (e) => setSelectedYear(parseInt(e.target.value))
+            },
+              years.map(year =>
+                React.createElement('option', { key: year, value: year }, year)
+              )
+            )
+          ),
+
+          React.createElement('div', { className: 'form-group' },
+            React.createElement('label', { className: 'form-label' }, 'Περιγραφή (προαιρετική)'),
+            React.createElement('input', {
+              type: 'text',
+              className: 'form-input',
+              value: description,
+              onChange: (e) => setDescription(e.target.value),
+              placeholder: 'π.χ. Εβδομαδιαία παράδοση'
+            })
+          )
+        ),
+
+        React.createElement('div', { style: { padding: '16px', backgroundColor: '#E8F5E9', borderRadius: '8px', marginBottom: '20px' } },
+          React.createElement('div', { style: { fontSize: '16px', marginBottom: '8px' } },
+            `Πελάτες: ${selectedClients.length}`
+          ),
+          React.createElement('div', { style: { fontSize: '20px', fontWeight: 'bold', color: '#2E7D32' } },
+            `Σύνολο: €${grandTotal.toFixed(2)}`
+          )
+        ),
+
+        React.createElement('div', { className: 'modal-actions' },
+          React.createElement('button', {
+            type: 'button',
+            className: 'btn btn-outline',
+            onClick: onCancel
+          }, 'Ακύρωση'),
+          React.createElement('button', {
+            type: 'submit',
+            className: 'btn btn-primary'
+          }, 'Αποθήκευση')
+        )
+      )
+    )
+  );
+}
+
+function AddClientModal({ clients, onSelect, onCancel }) {
+  return React.createElement('div', { className: 'modal-overlay', onClick: onCancel },
+    React.createElement('div', { 
+      className: 'modal',
+      onClick: (e) => e.stopPropagation()
+    },
+      React.createElement('div', { className: 'modal-header' },
+        React.createElement('h2', null, 'Επιλογή Πελάτη')
+      ),
+
+      clients.length === 0 ? 
+        React.createElement('div', { className: 'empty-state' },
+          React.createElement('p', null, '✅ Όλοι οι πελάτες έχουν ήδη προστεθεί!')
+        ) :
+        React.createElement('div', { className: 'client-select-list' },
+          clients.sort((a, b) => a.name.localeCompare(b.name)).map(client =>
+            React.createElement('button', {
+              key: client.id,
+              className: 'client-select-item',
+              onClick: () => onSelect(client.id)
+            }, client.name)
+          )
+        ),
+
+      React.createElement('div', { className: 'modal-actions' },
+        React.createElement('button', {
+          className: 'btn btn-outline',
+          onClick: onCancel
+        }, 'Ακύρωση')
+      )
+    )
+  );
+}
+
+function ClientsView({ clients, materials, onAddClient, onUpdateClient, onDeleteClient }) {
+  const [showModal, setShowModal] = useState(false);
+  const [editingClient, setEditingClient] = useState(null);
+
+  const handleAddClick = () => {
+    setEditingClient(null);
+    setShowModal(true);
+  };
+
+  const handleEditClick = (client) => {
+    setEditingClient(client);
+    setShowModal(true);
+  };
+
+  const handleDeleteClick = (clientId) => {
+    if (confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε αυτόν τον πελάτη;')) {
+      onDeleteClient(clientId);
+    }
+  };
+
+  const handleSaveClient = (clientData) => {
+    if (editingClient) {
+      onUpdateClient(editingClient.id, clientData);
+    } else {
+      onAddClient(clientData);
+    }
+    setShowModal(false);
+  };
+
+  const sortedClients = [...clients].sort((a, b) => a.name.localeCompare(b.name));
+
+  return React.createElement('div', null,
+    React.createElement('div', { className: 'card' },
+      React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' } },
+        React.createElement('h2', null, 'Διαχείριση Πελατών'),
+        React.createElement('button', {
+          className: 'btn btn-primary',
+          onClick: handleAddClick,
+          style: { fontSize: '18px', minHeight: '54px' }
+        }, '➕ Προσθήκη Νέου Πελάτη')
+      ),
+
+      sortedClients.length === 0 ? 
+        React.createElement('div', { className: 'empty-state' },
+          React.createElement('p', null, '👆 Προσθέστε τον πρώτο σας πελάτη κάνοντας κλικ πάνω!')
+        ) :
+        React.createElement('div', { className: 'client-list' },
+          sortedClients.map(client =>
+            React.createElement('div', { key: client.id, className: 'client-item' },
+              React.createElement('div', { className: 'client-header' },
+                React.createElement('h3', null, client.name),
+                React.createElement('div', { className: 'client-actions' },
+                  React.createElement('button', {
+                    className: 'btn btn-outline btn-small',
+                    onClick: () => handleEditClick(client)
+                  }, '✏️ Επεξεργασία'),
+                  React.createElement('button', {
+                    className: 'btn btn-danger btn-small',
+                    onClick: () => handleDeleteClick(client.id)
+                  }, '🗑️ Διαγραφή')
+                )
+              ),
+              React.createElement('div', { className: 'material-list' },
+                client.materials.map(material =>
+                  React.createElement('div', { key: material.type, className: 'material-item' },
+                    React.createElement('span', { className: 'material-name' }, material.type),
+                    React.createElement('span', { className: 'material-price' }, `€${material.price.toFixed(2)}/τόνο`)
+                  )
+                )
+              )
+            )
+          )
+        )
+    ),
+
+    showModal && React.createElement(ClientFormModal, {
+      client: editingClient,
+      materials,
+      onSave: handleSaveClient,
+      onCancel: () => setShowModal(false)
+    })
+  );
+}
+
+function ClientFormModal({ client, materials, onSave, onCancel }) {
+  const [name, setName] = useState(client?.name || '');
+  const [prices, setPrices] = useState(() => {
+    const initialPrices = {};
+    materials.forEach(material => {
+      const existing = client?.materials.find(m => m.type === material);
+      initialPrices[material] = existing?.price || 0;
+    });
+    return initialPrices;
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name.trim()) {
+      alert('Το όνομα πελάτη είναι υποχρεωτικό!');
+      return;
+    }
+
+    const clientData = {
+      name: name.trim(),
+      materials: materials.map(material => ({
+        type: material,
+        price: parseFloat(prices[material]) || 0
+      }))
+    };
+
+    onSave(clientData);
+  };
+
+  const handlePriceChange = (material, value) => {
+    setPrices({
+      ...prices,
+      [material]: value
+    });
+  };
+
+  return React.createElement('div', { className: 'modal-overlay', onClick: onCancel },
+    React.createElement('div', { 
+      className: 'modal',
+      onClick: (e) => e.stopPropagation()
+    },
+      React.createElement('div', { className: 'modal-header' },
+        React.createElement('h2', null, client ? 'Επεξεργασία Πελάτη' : 'Προσθήκη Νέου Πελάτη')
+      ),
+
+      React.createElement('form', { onSubmit: handleSubmit },
+        React.createElement('div', { className: 'form-group' },
+          React.createElement('label', { className: 'form-label' }, 'Όνομα Πελάτη *'),
+          React.createElement('input', {
+            type: 'text',
+            className: 'form-input',
+            value: name,
+            onChange: (e) => setName(e.target.value),
+            placeholder: 'Εισάγετε όνομα πελάτη',
+            required: true
+          })
+        ),
+
+        React.createElement('div', { className: 'form-group' },
+          React.createElement('label', { className: 'form-label' }, 'Τιμές Υλικών (€/τόνο)'),
+          React.createElement('div', { className: 'price-inputs' },
+            materials.map(material =>
+              React.createElement('div', { key: material, className: 'price-input-row' },
+                React.createElement('div', null,
+                  React.createElement('label', { className: 'form-label' }, material)
+                ),
+                React.createElement('div', null,
+                  React.createElement('input', {
+                    type: 'number',
+                    className: 'form-input',
+                    value: prices[material],
+                    onChange: (e) => handlePriceChange(material, e.target.value),
+                    min: '0',
+                    step: '0.01',
+                    placeholder: '0.00'
+                  })
+                )
+              )
+            )
+          )
+        ),
+
+        React.createElement('div', { className: 'modal-actions' },
+          React.createElement('button', {
+            type: 'button',
+            className: 'btn btn-outline',
+            onClick: onCancel
+          }, 'Ακύρωση'),
+          React.createElement('button', {
+            type: 'submit',
+            className: 'btn btn-primary'
+          }, client ? 'Ενημέρωση Πελάτη' : 'Προσθήκη Πελάτη')
+        )
+      )
+    )
+  );
+}
+
+function MaterialsView({ materials, onAddMaterial, onRenameMaterial, onDeleteMaterial }) {
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showRenameModal, setShowRenameModal] = useState(false);
+  const [renamingMaterial, setRenamingMaterial] = useState(null);
+
+  const handleAddClick = () => {
+    setShowAddModal(true);
+  };
+
+  const handleRenameClick = (material) => {
+    setRenamingMaterial(material);
+    setShowRenameModal(true);
+  };
+
+  const handleDeleteClick = (material) => {
+    if (confirm(`Είστε σίγουροι ότι θέλετε να διαγράψετε το "${material}"; Αυτό θα το αφαιρέσει από όλους τους πελάτες.`)) {
+      onDeleteMaterial(material);
+    }
+  };
+
+  return React.createElement('div', null,
+    React.createElement('div', { className: 'card' },
+      React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' } },
+        React.createElement('h2', null, 'Διαχείριση Τύπων Υλικών'),
+        React.createElement('button', {
+          className: 'btn btn-primary',
+          onClick: handleAddClick,
+          style: { fontSize: '18px', minHeight: '54px' }
+        }, '➕ Προσθήκη Υλικού')
+      ),
+
+      materials.length === 0 ?
+        React.createElement('div', { className: 'empty-state' },
+          React.createElement('p', null, '👆 Προσθέστε τον πρώτο τύπο υλικού κάνοντας κλικ πάνω!')
+        ) :
+        React.createElement('div', { className: 'material-type-list' },
+          materials.map(material =>
+            React.createElement('div', { key: material, className: 'material-type-item' },
+              React.createElement('span', { className: 'material-type-name' }, material),
+              React.createElement('div', { className: 'material-type-actions' },
+                React.createElement('button', {
+                  className: 'btn btn-outline btn-small',
+                  onClick: () => handleRenameClick(material)
+                }, 'Μετονομασία'),
+                React.createElement('button', {
+                  className: 'btn btn-danger btn-small',
+                  onClick: () => handleDeleteClick(material)
+                }, 'Διαγραφή')
+              )
+            )
+          )
+        )
+    ),
+
+    showAddModal && React.createElement(AddMaterialModal, {
+      onSave: (name) => {
+        onAddMaterial(name);
+        setShowAddModal(false);
+      },
+      onCancel: () => setShowAddModal(false)
+    }),
+
+    showRenameModal && React.createElement(RenameMaterialModal, {
+      material: renamingMaterial,
+      onSave: (newName) => {
+        onRenameMaterial(renamingMaterial, newName);
+        setShowRenameModal(false);
+      },
+      onCancel: () => setShowRenameModal(false)
+    })
+  );
+}
+
+function AddMaterialModal({ onSave, onCancel }) {
+  const [name, setName] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name.trim()) {
+      alert('Το όνομα υλικού είναι υποχρεωτικό!');
+      return;
+    }
+    onSave(name.trim());
+  };
+
+  return React.createElement('div', { className: 'modal-overlay', onClick: onCancel },
+    React.createElement('div', { 
+      className: 'modal',
+      onClick: (e) => e.stopPropagation()
+    },
+      React.createElement('div', { className: 'modal-header' },
+        React.createElement('h2', null, 'Προσθήκη Νέου Υλικού')
+      ),
+
+      React.createElement('form', { onSubmit: handleSubmit },
+        React.createElement('div', { className: 'form-group' },
+          React.createElement('label', { className: 'form-label' }, 'Όνομα Υλικού *'),
+          React.createElement('input', {
+            type: 'text',
+            className: 'form-input',
+            value: name,
+            onChange: (e) => setName(e.target.value),
+            placeholder: 'π.χ. Ασβεστολιθος, Τούβλα, κ.λπ.',
+            required: true,
+            autoFocus: true
+          })
+        ),
+
+        React.createElement('div', { className: 'modal-actions' },
+          React.createElement('button', {
+            type: 'button',
+            className: 'btn btn-outline',
+            onClick: onCancel
+          }, 'Ακύρωση'),
+          React.createElement('button', {
+            type: 'submit',
+            className: 'btn btn-primary'
+          }, 'Προσθήκη Υλικού')
+        )
+      )
+    )
+  );
+}
+
+function RenameMaterialModal({ material, onSave, onCancel }) {
+  const [name, setName] = useState(material);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name.trim()) {
+      alert('Το όνομα υλικού είναι υποχρεωτικό!');
+      return;
+    }
+    if (name.trim() === material) {
+      onCancel();
+      return;
+    }
+    onSave(name.trim());
+  };
+
+  return React.createElement('div', { className: 'modal-overlay', onClick: onCancel },
+    React.createElement('div', { 
+      className: 'modal',
+      onClick: (e) => e.stopPropagation()
+    },
+      React.createElement('div', { className: 'modal-header' },
+        React.createElement('h2', null, 'Μετονομασία Υλικού')
+      ),
+
+      React.createElement('form', { onSubmit: handleSubmit },
+        React.createElement('div', { className: 'form-group' },
+          React.createElement('label', { className: 'form-label' }, 'Όνομα Υλικού *'),
+          React.createElement('input', {
+            type: 'text',
+            className: 'form-input',
+            value: name,
+            onChange: (e) => setName(e.target.value),
+            placeholder: 'Εισάγετε νέο όνομα',
+            required: true,
+            autoFocus: true
+          })
+        ),
+
+        React.createElement('div', { className: 'modal-actions' },
+          React.createElement('button', {
+            type: 'button',
+            className: 'btn btn-outline',
+            onClick: onCancel
+          }, 'Ακύρωση'),
+          React.createElement('button', {
+            type: 'submit',
+            className: 'btn btn-primary'
+          }, 'Μετονομασία Υλικού')
+        )
+      )
+    )
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(App));
+    </script>
 </body>
 </html>
